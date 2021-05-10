@@ -12,13 +12,14 @@
                     <th scope="col">Stock</th>
                     </tr>
                 </thead>
-                <!--
-                <tbody>
-                    <td class="colspan-4 mx-auto display-4">No hay Stock de Pizzas</td>
-                </tbody>
-                -->
-                <tbody v-for="(pizza, i) in productos" :key="i">
+
+                <tbody v-if="productos && productos.stock === 0">
                     <tr>
+                        <td colspan="6" class="mx-auto display-7 text-danger">Sin stock de pizzas</td>
+                    </tr>
+                </tbody>
+                <tbody v-else>
+                    <tr v-for="(pizza, i) in productos" :key="i" :class="{noStock: productos.stock === 0}">
                         <td>{{pizza.id}}</td>
                         <td>Pizza {{pizza.name}}</td>
                         <td>$ {{pizza.price}}</td>
@@ -33,19 +34,24 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex"
+import { mapState } from "vuex"
 
 export default {
   name: "Inventario",
-
+  data() {
+    return {
+//
+    }
+  },
   computed: {
     ...mapState(["productos"])
   },
-  methods: {
-    ...mapActions(["getData"]),
-  },
-  created() {
-    this.getData()
-  }
 };
 </script>
+
+<style scoped>
+  .noStock {
+    background-color: rgb(189, 117, 117);
+    color: white;
+  }
+</style>

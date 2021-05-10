@@ -6,12 +6,20 @@
 </template>
 
 <script>
-
 import Navbar from "@/components/Navbar.vue"
+import { mapActions } from "vuex"
+
 export default {
+  
   name: "App",
   components: {
     Navbar,
+  },
+  methods: {
+        ...mapActions(["getData"]),
+  },
+  created() {
+    this.getData()
   }
 }
 </script>

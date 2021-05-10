@@ -55,20 +55,39 @@ export default new Vuex.Store({
       const confirmacion = confirm("¿Quiere confirmar tu compra?")
       console.log("Pucha que estuvo dificil :(");
       if(confirmacion) {
-        console.log(confirmacion);
-          const venta = state.carrito.map(obj => {
-              const obj2 = {
-                  id: obj.id,
-                  nombre: obj.nombre,
-                  precioSubtotal: obj.subtotal,
-                  cantidadVendida: obj.cantidad,
+        console.log("Falle con los test :(");
+        const venta = state.carrito.map(obj => {
+          const obj2 = {
+            id: obj.id,
+            nombre: obj.nombre,
+            precioSubtotal: obj.subtotal,
+            cantidadVendida: obj.cantidad,
+          }
+          return obj2
+        })
+        // para que la funcion se sume al total de las ventas
+        venta.forEach((producto) => {
+          const nuevaVenta = producto;
+          const finder = state.ventas.find((obj) => obj.id === nuevaVenta.id)
+
+          if(!finder) {
+            state.ventas.push(nuevaVenta)
+          }else {
+            state.ventas = state.ventas.map((vend) => {
+              const obj3 = {
+                id: vend.id,
+                nombre: vend.nombre,
+                precioSubtotal: vend.id === nuevaVenta.id ? vend.precioSubtotal + nuevaVenta.precioSubtotal : vend.precioSubtotal,
+                cantidadVendida: vend.id === nuevaVenta.id ? vend.cantidadVendida + nuevaVenta.cantidadVendida : vend.cantidadVendida,
               }
-              return obj2
-          })
-          state.ventas = venta
+              return obj3
+            })
+          }
+        })
+        // state.ventas = venta
 
           // DEscontar al stock
-          state.productos.forEach((producto) => {
+        state.productos.forEach((producto) => {
             const id = producto.id;
 
             state.carrito.forEach((el) => {
@@ -76,9 +95,12 @@ export default new Vuex.Store({
                 producto.stock = producto.stock - el.cantidad
               }
             })
-          })
+        })
       }
-  }
+    },
+    limpiar(state) {
+      state.carrito = []
+    }
   },
   actions: {
     async getData({ commit }) {

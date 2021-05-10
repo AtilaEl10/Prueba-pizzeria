@@ -35,7 +35,7 @@
                         <td colspan="5"><button @click="comprar" class="btn btn-warning">Comprar</button></td>
                     </tr>
                     <tr>
-                        <td colspan="1"><button class="btn btn-secondary">Limpiar carrito</button></td>
+                        <td colspan="1"><button @click="limpiar" class="btn btn-secondary">Limpiar carrito</button></td>
                     </tr>
                 </tbody>
                 </table>
@@ -59,6 +59,7 @@ export default {
     },
     methods: {
         ...mapMutations(["comprar"]),
+        ...mapMutations(["limpiar"]),
     },
 }
 </script>

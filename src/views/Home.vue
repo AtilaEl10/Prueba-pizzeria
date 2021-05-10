@@ -7,7 +7,7 @@
         <div class="col-12 mt-5">
           <div class="card-pizzas">
               <div class="row">
-                <div class="col-4 mb-5" v-for="pizza in productosFiltrados" :key="pizza.name"> 
+                <div class="col-md-4 col-sm-6 mb-5" v-for="pizza in productosFiltrados" :key="pizza.name"> 
                   <div class="card h-100">
                     <img :src="pizza.img" class="card-img-top" alt="pizzas">
                     <div class="card-body">
@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { mapMutations, mapActions, mapGetters } from "vuex"
+import { mapMutations, mapGetters } from "vuex"
 
 export default {
   name: "Home",
@@ -42,11 +42,7 @@ export default {
     ...mapGetters(["productosFiltrados"]),
   },
   methods: {
-    ...mapActions(["getData"]),
     ...mapMutations(["agregarPizza"]),
   },
-  created() {
-    this.getData()
-  }
 };
 </script>

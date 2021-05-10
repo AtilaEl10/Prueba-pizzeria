@@ -15,6 +15,9 @@
                             <router-link class="nav-link" to="/inventario">Inventario</router-link>
                         </li>
                         <li class="nav-item">
+                            <router-link class="nav-link" to="/carrito">Carrito</router-link>
+                        </li>
+                        <li class="nav-item">
                             <router-link class="nav-link" to="/ventas">Ventas</router-link>
                         </li>
                     </ul>

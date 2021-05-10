@@ -24,6 +24,12 @@ const routes = [
       import("../views/Carrito.vue"),  
   },
   {
+   path: "/ventas",
+   name: "Ventas",
+    component: () =>
+      import("../views/Ventas.vue"),  
+  },
+  {
     path: "/*",
     name: "Error 404",
     component: Error
